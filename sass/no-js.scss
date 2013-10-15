@@ -1,0 +1,30 @@
+html, body { margin: 0; padding: 0; }
+
+body {
+  width: 100%;
+  height: 100%;
+  background: #222;
+  font-family: PT Sans, Arial, sans-serif;
+  font-size: 20px;
+}
+
+body, a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+#no-js {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  line-height: 150%;
+  height: 3em;
+  margin: auto;
+  margin-top: -1.5em;
+  text-align: center;
+}
+
+strong {
+  color: #fa0;
+}
