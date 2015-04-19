@@ -10,8 +10,8 @@ lib-cov
 pids
 logs
 results
-.sass-cache
 css
+.tmp
 
 npm-debug.log
 node_modules
