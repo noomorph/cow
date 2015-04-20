@@ -7,6 +7,7 @@ function SoundManager(options) {
         throw new Exception('<audio> is not supported');
     }
 
+    this.currentTrack = null;
     this.paths = {
         intro: options.intro[format],
         main: options.main[format],
@@ -15,6 +16,10 @@ function SoundManager(options) {
 }
 
 SoundManager.prototype.ready = function () {
+    if (this._loading) {
+        return this._loading;
+    }
+
     var self = this,
         promises = [
             createAudio(this.paths.intro),
@@ -22,32 +27,49 @@ SoundManager.prototype.ready = function () {
             createAudio(this.paths.outro)
         ];
 
-    return Promise.all(promises).then(function (audios) {
+    this._loading = Promise.all(promises).then(function (audios) {
         self.tracks = {
             intro: audios[0],
             main: audios[1],
             outro: audios[2]
         };
 
+        self.tracks.main.loop = true;
+
         return self;
     });
+
+    return this._loading;
 };
 
-SoundManager.prototype.stop = function (key) {
-    if (key) {
-        this.tracks[key].pause();
-    } else {
-        this.tracks.intro.pause();
-        this.tracks.main.pause();
-        this.tracks.outro.pause();
+SoundManager.prototype.stop = function () {
+    if (this.currentTrack) {
+        this.currentTrack.pause();
     }
 
     return Promise.resolve(this);
 };
 
+SoundManager.prototype.play = function (key) {
+    return this.start(key).then(function (self) {
+        return new Promise(function (resolve) {
+            var track = self.currentTrack;
+
+            track.addEventListener('ended', function onEnded() {
+                resolve(self);
+                track.removeEventListener('ended', onEnded);
+            });
+        });
+    });
+};
+
 SoundManager.prototype.start = function (key) {
     return this.stop().then(function (self) {
-        self.tracks[key].play();
+        var track = self.tracks[key];
+        self.currentTrack = track;
+        track.play();
+
+        console.log('starting to play', track.src);
         return self;
     });
 };
