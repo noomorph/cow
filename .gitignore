@@ -10,8 +10,9 @@ lib-cov
 pids
 logs
 results
-css
 .tmp
+.DS_Store
 
 npm-debug.log
 node_modules
+dist

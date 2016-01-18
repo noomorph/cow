@@ -1,3 +1,16 @@
 {
-    "env": "node"
+    "extends": "airbnb/base",
+    "globals": {
+        "TweenLite": true,
+        "TweenMax": true,
+        "TimelineMax": true,
+        "TimelineLite": true,
+        "Linear": true
+    },
+    "env": {
+        "browser": true,
+    },
+    "rules": {
+        "indent": [2, 4]
+    }
 }
