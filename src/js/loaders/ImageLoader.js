@@ -22,10 +22,11 @@ export default class ImageLoader {
                 .all(promises)
                 .then(images => {
                     this.images = images;
+                    return images;
                 });
-
-            return this._readyPromise;
         }
+
+        return this._readyPromise;
     }
 }
 
