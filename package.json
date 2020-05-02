@@ -8,7 +8,9 @@
     "start": "NODE_ENV=development webpack-dev-server -d",
     "start:hot": "NODE_ENV=development webpack-dev-server -d --hot --inline",
     "build": "NODE_ENV=production webpack -p",
-    "test": "NODE_ENV=development webpack && mocha"
+    "test": "NODE_ENV=development webpack && mocha",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,8 @@
   "dependencies": {
     "babel-polyfill": "^6.3.14",
     "gsap": "^1.18.2",
-    "lodash": "^4.0.0"
+    "lodash": "^4.0.0",
+    "snyk": "^1.316.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
@@ -44,5 +47,6 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.11",
     "webpack-dev-server": "^1.14.1"
-  }
+  },
+  "snyk": true
 }
