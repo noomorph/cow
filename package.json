@@ -22,7 +22,7 @@
   "homepage": "https://github.com/noomorph/cow#readme",
   "dependencies": {
     "babel-polyfill": "^6.3.14",
-    "gsap": "^1.18.2",
+    "gsap": "^3.6.0",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
